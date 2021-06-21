@@ -38,7 +38,7 @@ def list():
 	configuration.host = 'https://cloudone.trendmicro.com/api'
 
 	# Authentication
-	configuration.api_key['api-secret-key'] = '22A83D1A-197B-5B20-2F0F-2B7B84A061A9:5E986039-3C78-8CCE-AF5A-FD2E4478A830:rCmYF6SEd6hiOwUSNXePB2MGI39SHer6KopDzOzlDic='
+	configuration.api_key['api-secret-key'] = '21283D1A-197B-5B20-2F0F-2B71586061A9:5E986039-3478-SFEE-AF5A-FD2E4478A830:rCmYF6SEd6hiOwUSNXePB2M12dfFHer6KopDzOzlDic='
 
 	# Initialization
 	# Set Any Required Values
@@ -64,7 +64,7 @@ def description():
 	configuration.host = 'https://cloudone.trendmicro.com/api/computers/{17}'
 
 	# Authentication
-	configuration.api_key['api-secret-key'] = '22A83D1A-197B-5B20-2F0F-2B7B84A061A9:5E986039-3C78-8CCE-AF5A-FD2E4478A830:rCmYF6SEd6hiOwUSNXePB2MGI39SHer6KopDzOzlDic='
+	configuration.api_key['api-secret-key'] = '21283D1A-197B-5B20-2F0F-2B71586061A9:5E986039-3478-SFEE-AF5A-FD2E4478A830:rCmYF6SEd6hiOwUSNXePB2M12dfFHer6KopDzOzlDic='
 
 	# Initialization
 	# Set Any Required Values

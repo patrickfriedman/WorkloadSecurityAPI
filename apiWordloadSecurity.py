@@ -56,7 +56,7 @@ def list():
 	except ApiException as e:
 		print("An exception occurred when calling ComputersApi.list_computers: %s\n" % e)
 
-def description():
+def description(): # couldnt get it to work via hostname
 	# Setup
 	if not sys.warnoptions:
 		warnings.simplefilter("ignore")

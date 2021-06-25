@@ -10,14 +10,14 @@ import time
 lists = []
 
 def text():
-	account_sid = 'AC20aef97ee2405b304d03111b5ae30439'
-	auth_token = 'ae2682f547d1235d992c4bd32917f5aa'
+	account_sid = 'AC20aef97ee2405b157s43111b5ae30439'
+	auth_token = 'ae15fdef547d1235d992c4bd32917f5aa'
 	client = Client(account_sid, auth_token)
 	message = client.messages \
 						.create(
 								body="Some unauthorized changes were made to your agent: " + str(lists),
-								from_='+19725034157',
-								to='+12144713159'
+								from_='+19725034512',
+								to='+12141597159'
 						)
 	print(message.sid)
 
@@ -85,7 +85,7 @@ def list():
 	configuration.host = 'https://cloudone.trendmicro.com/api'
 
 	# Authentication
-	configuration.api_key['api-secret-key'] = '22A83D1A-197B-5B20-2F0F-2B7B84A061A9:5E986039-3C78-8CCE-AF5A-FD2E4478A830:rCmYF6SEd6hiOwUSNXePB2MGI39SHer6KopDzOzlDic='
+	configuration.api_key['api-secret-key'] = '22A83D1A-197B-5B20-2F0F-2B7B5267f1A9:5E986039-3C78-8CCE-AF5A-FD2E4478A830:rCmYF6SEd6hiOwUSNXePB2MGI39SHer6KopDzOzlDic='
 
 	# Initialization
 	# Set Any Required Values
@@ -113,7 +113,7 @@ while(noerror):
 	write(newapi)
 
 	if(api_response != newapi):
-		playsound('/Users/Koolk/OneDrive/Desktop/UNT/Putty Backup/Personal Projects/CPITs/startup.mp3')
+		playsound('startup.mp3')
 		print("\n" + str(lists) + "\n")
 		text()
 		noerror = False

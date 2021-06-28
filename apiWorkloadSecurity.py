@@ -7,17 +7,18 @@ from twilio.rest import Client
 import csv
 import time
 # play a sound when a parameter changes and send a message
+
 lists = []
 
 def text():
-	account_sid = 'AC20aef97ee2405b157s43111b5ae30439'
-	auth_token = 'ae15fdef547d1235d992c4bd32917f5aa'
+	account_sid = 'sid'
+	auth_token = 'auth'
 	client = Client(account_sid, auth_token)
 	message = client.messages \
 						.create(
 								body="Some unauthorized changes were made to your agent: " + str(lists),
-								from_='+19725034512',
-								to='+12141597159'
+								from_='+1',
+								to='+1'
 						)
 	print(message.sid)
 
@@ -28,7 +29,7 @@ def write(list):
 	sourceFile = open('api.csv', 'w')
 
 	csvreader = csv.writer(sourceFile, delimiter=',')
-	csvreader.writerow(['COMPUTER NAME', 'PLATFORM', 'POLICY NAME', 'STATUS'])
+	csvreader.writerow(['Information: '])
 	
 	api = str(list).split('\n')
 	api.pop(0)
@@ -85,7 +86,7 @@ def list():
 	configuration.host = 'https://cloudone.trendmicro.com/api'
 
 	# Authentication
-	configuration.api_key['api-secret-key'] = '22A83D1A-197B-5B20-2F0F-2B7B5267f1A9:5E986039-3C78-8CCE-AF5A-FD2E4478A830:rCmYF6SEd6hiOwUSNXePB2MGI39SHer6KopDzOzlDic='
+	configuration.api_key['api-secret-key'] = apikey
 
 	# Initialization
 	# Set Any Required Values
@@ -104,16 +105,18 @@ def list():
 		print("An exception occurred when calling ComputersApi.list_computers: %s\n" % e)
 
 noerror = True
+apikey = input("Enter API key: ")
 while(noerror):
 	api_response = list()
 	write(api_response)
 	time.sleep(5)
+
 	lists = []
 	newapi = list()
 	write(newapi)
 
 	if(api_response != newapi):
-		playsound('startup.mp3')
+		playsound('/Users/Koolk/OneDrive/Desktop/UNT/Putty Backup/Personal Projects/CPITs/startup.mp3')
 		print("\n" + str(lists) + "\n")
 		text()
 		noerror = False

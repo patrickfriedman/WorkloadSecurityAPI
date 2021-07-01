@@ -28,29 +28,30 @@ def write(list):
 	ec2 = 0
 	sourceFile = open('api.csv', 'w')
 
-	csvreader = csv.writer(sourceFile, delimiter=',')
-	csvreader.writerow(['Information: '])
+	csvreader = csv.writer(sourceFile, delimiter=',', lineterminator='\n')
+	#csvreader.writerow(['Information: '])
 	
 	api = str(list).split('\n')
 	api.pop(0)
 
 	for i in api:
 		print(i)
-		sourceFile.writelines(i)
+		#sourceFile.writelines(i)
 		count = count + 1
 		computers = computers + 1
 
 		if (count == 4):
-			sourceFile.write('\n')
+			#sourceFile.write('\n')
 			count = 0
 		if (computers == 42):
 			print('\n')
-			csvreader.writerow([])
+			#csvreader.writerow([])
 			computers = 0
 			ec2 = ec2 + 1
 	
-	csvreader.writerow([])
+	#csvreader.writerow([])
 	csvreader.writerow(['COMPUTER NAME:', 'PLATFORM:', 'POLICY NAME:', 'STATUS:'])
+
 
 	flag = 0
 	for x in range(ec2 + 1): 
@@ -59,7 +60,7 @@ def write(list):
 		name = format(name)
 		sourceFile.write(name)
 
-		platform = api.pop((x * 38) + 30)		#change to fix output/api error
+		platform = api.pop((x * 38) + 24)		#change to fix output/api error 30*
 		platform = format(platform)
 		sourceFile.write(platform)
 
@@ -114,14 +115,17 @@ def format(string):
 	policySubString = "policy_id"
 	statusSubString = "0.0.0.0"
 
+	extra = "last_appliance_communication"
+
 	print(string)
 	if nameSubString in string:
 		string = string.replace("'", '')
 		return string.replace("display_name: ", '')
-	if platformSubString in string:
-		return string.replace("'platform': ", 'AWS Linux') # error in the api so hardcoded
+	if extra in string:
+		# return string.replace("'platform': ", 'AWS Linux') 
+		return string.replace("'last_appliance_communication': None", 'AWS Linux')	# error in the api so hardcoded
 	if policySubString in string:
-		return string.replace("'policy_id': ", 'Policy: ')
+		return string.replace("'policy_id': ", '')
 	if statusSubString in string:
 		return string.replace("'agent_version': '0.0.0.0'", 'Activation Needed.')
 	else:

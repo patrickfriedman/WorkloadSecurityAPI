@@ -11,8 +11,8 @@ import time
 lists = []
 
 def text():
-	account_sid = 'sid'
-	auth_token = 'auth'
+	account_sid = ''
+	auth_token = ''
 	client = Client(account_sid, auth_token)
 	message = client.messages \
 						.create(
@@ -50,21 +50,25 @@ def write(list):
 			ec2 = ec2 + 1
 	
 	csvreader.writerow([])
-	csvreader.writerow(['COMPUTER NAME', 'PLATFORM', 'POLICY NAME', 'STATUS'])
+	csvreader.writerow(['COMPUTER NAME:', 'PLATFORM:', 'POLICY NAME:', 'STATUS:'])
 
 	flag = 0
 	for x in range(ec2 + 1): 
 		flag = flag + 1
 		name = api.pop((x * 38) + 12)
+		name = format(name)
 		sourceFile.write(name)
 
-		platform = api.pop((x * 38) + 30)
+		platform = api.pop((x * 38) + 30)		#change to fix output/api error
+		platform = format(platform)
 		sourceFile.write(platform)
 
-		policyname = api.pop((x * 38) + 4)
+		policyname = api.pop((x * 38) + 30)
+		policyname = format(policyname)
 		sourceFile.write(policyname)
 
 		status = api.pop((x * 38) + 1)
+		status = format(status)
 		sourceFile.write(status)
 
 		sourceFile.write('\n')
@@ -104,6 +108,25 @@ def list():
 	except ApiException as e:
 		print("An exception occurred when calling ComputersApi.list_computers: %s\n" % e)
 
+def format(string):
+	nameSubString = "display_name"
+	platformSubString = "platform"
+	policySubString = "policy_id"
+	statusSubString = "0.0.0.0"
+
+	print(string)
+	if nameSubString in string:
+		string = string.replace("'", '')
+		return string.replace("display_name: ", '')
+	if platformSubString in string:
+		return string.replace("'platform': ", 'AWS Linux') # error in the api so hardcoded
+	if policySubString in string:
+		return string.replace("'policy_id': ", 'Policy: ')
+	if statusSubString in string:
+		return string.replace("'agent_version': '0.0.0.0'", 'Activation Needed.')
+	else:
+		return string.replace("'agent_version': ", 'Activated.')
+
 noerror = True
 apikey = input("Enter API key: ")
 while(noerror):
@@ -116,7 +139,7 @@ while(noerror):
 	write(newapi)
 
 	if(api_response != newapi):
-		playsound('/Users/Koolk/OneDrive/Desktop/UNT/Putty Backup/Personal Projects/CPITs/startup.mp3')
+		playsound('startup.mp3')
 		print("\n" + str(lists) + "\n")
 		text()
 		noerror = False
